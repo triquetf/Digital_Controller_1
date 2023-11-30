@@ -5,7 +5,7 @@
 // TEST GIT - BRANCH
 // DEFINE 
 
- #define F_CPU 8000000UL  // 8 MHz
+
 // Gestion registre par bit unique
 #define SET_BIT(port,bit)  (port |= (1<<bit))   //set bit in port
 #define CLR_BIT(port,bit)  (port &= ~(1<<bit))  //clear bit in port
@@ -20,11 +20,11 @@
 
 enum {NONE,UP, DOWN, LEFT, RIGHT, ENTER};	// Used with the button variable
 
-//#define F_CPU 16000000$
-#define F_CPU 1000000
+
+#define _8MHZ
 
 // STATE MACHINE
-// Niv Sup�rieur
+// Niv Superieur
 #define ST_TXT_WELCOME		1
 
 // FOCTIONNALITES , HORIZONTAL
@@ -168,7 +168,7 @@ enum {NONE,UP, DOWN, LEFT, RIGHT, ENTER};	// Used with the button variable
 
 //CALLBACK
 void Switch_LED(void);	// callback timer --> cligotement de la LED
-void USART0_RX(volatile char *Trame_USART0);	// callback USART0 --> gestion de la commande re�ue via le port s�rie.
+void USART0_RX(volatile char *Trame_USART0);	// callback USART0 --> gestion de la commande recue via le port serie.
 
 //STATE MACHINE
 char Set_Pwm_Red(char input);

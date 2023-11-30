@@ -70,19 +70,35 @@ void USART0_Init_9600_INT_ON_RX(void)
 
 void USART0_Init_115200_INT_ON_RX(void)
 {
-	// fréquence horloge = 16000000 hz, Si Baudrate = 115200 alors UBRR = 16
-	//1xspeed  U2X0 = 1
-	UCSR0A |= (1<<U2X0);
-	// 115200 baud
-	//UBRR0H = 0x00;
-	//UBRR0L = 0x0C;
-	UBRR0 = 16;
-	// Configuration Emission + Réception, Interruptions en RX
-	//(UCSR0B) RXCIE0 = 1 | TXCIE0 =0 | UDRIE0 = 0 | RXEN0 = 1 | TXEN0 = 1 | UCSZ02 = 0 | RXB80 = 0 | TXB80 = 0
-	UCSR0B = 0b10011000;
-	// Async. mode, 8 bits, 1 bit de stop, pas de contrôle de parité
-	//(UCSR0C) UMSEL01 = 0 | UMSEL00 = 0 | UPM01 = 0 | UPM00 = 0 | USBS0 = 0 | UCSZ01 = 1 | UCSZ00 = 1 | UCPOL0 = 0;
-	UCSR0C = 0b00000110;
+	#if defined (_1MHZ)
+	#elif defined (_8MHZ)
+		// fréquence horloge = 8000000 hz, Si Baudrate = 115200 alors UBRR = 8
+		//1xspeed  U2X0 = 1
+		UCSR0A |= (1<<U2X0);
+		// 115200 baud
+		UBRR0 = 8;
+		// Configuration Emission + Réception, Interruptions en RX
+		//(UCSR0B) RXCIE0 = 1 | TXCIE0 =0 | UDRIE0 = 0 | RXEN0 = 1 | TXEN0 = 1 | UCSZ02 = 0 | RXB80 = 0 | TXB80 = 0
+		UCSR0B = 0b10011000;
+		// Async. mode, 8 bits, 1 bit de stop, pas de contrôle de parité
+		//(UCSR0C) UMSEL01 = 0 | UMSEL00 = 0 | UPM01 = 0 | UPM00 = 0 | USBS0 = 0 | UCSZ01 = 1 | UCSZ00 = 1 | UCPOL0 = 0;
+		UCSR0C = 0b00000110;
+	#elif defined (_16MHZ)
+		// fréquence horloge = 16000000 hz, Si Baudrate = 115200 alors UBRR = 16
+		//1xspeed  U2X0 = 1
+		UCSR0A |= (1<<U2X0);
+		// 115200 baud
+		//UBRR0H = 0x00;
+		//UBRR0L = 0x0C;
+		UBRR0 = 16;
+		// Configuration Emission + Réception, Interruptions en RX
+		//(UCSR0B) RXCIE0 = 1 | TXCIE0 =0 | UDRIE0 = 0 | RXEN0 = 1 | TXEN0 = 1 | UCSZ02 = 0 | RXB80 = 0 | TXB80 = 0
+		UCSR0B = 0b10011000;
+		// Async. mode, 8 bits, 1 bit de stop, pas de contrôle de parité
+		//(UCSR0C) UMSEL01 = 0 | UMSEL00 = 0 | UPM01 = 0 | UPM00 = 0 | USBS0 = 0 | UCSZ01 = 1 | UCSZ00 = 1 | UCPOL0 = 0;
+		UCSR0C = 0b00000110;
+	#endif
+	
 }
 
 

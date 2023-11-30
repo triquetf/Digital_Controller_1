@@ -22,10 +22,7 @@ int main (void)
  	//Initialisation hardware 
 	Init_Hardware();
 	//Initilisation LCD
-	lcd_init();
-	lcd_on();
-	lcd_disable_cursor();
-	lcd_set_cursor(0,0);
+	lcd_init(LCD_DISP_ON); lcd_clrscr(); 
 	
 	
 	//Initialisation ADC
@@ -70,182 +67,182 @@ void USART0_RX(volatile char *Trame_USART0)
 	
 	char Date(char input)
 	{
-		// Maxime P. & Florent
+		// Arnaud + Julien
 		//return ST_FCT_DATE;
 		return ST_TXT_TIME;
 	}
 	
 	char Time(char input)
 	{
-		// Maxime P. & Florent M.
+		// Arnaud + Julien
 		//return ST_TXT_SENSOR;
 		return ST_TXT_CLOCK;
 	}
 	
 	char Adc(char input)
 	{
-		// Someone 
+		// Florimond + Daniel + Pierre + Rémi  
 		return ST_TXT_ACTUATOR;
 	}
 	
 	char Current(char input)
 	{
 		
-		// Lukman N. & Rémi G
+		// Antoine + Mathéo
 		return ST_TXT_ACTUATOR;
 	}
 	
 	char Thermocouple(char input)
 	{
 		
-		// Pierre C. & Arnaud D.
+		// Nobody
 		return ST_TXT_ACTUATOR;
 	}
 	
 	char Dac(char input)
 	{
-		// Pierre B.
+		// Pierre + Rémi 
 		return ST_TXT_STORAGE;
 	}
 	
 	char Relay(char input)
 	{
-		// Someone
+		// Florimond + Daniel + Pierre + Rémi 
 		return ST_TXT_STORAGE;
 	}
 	
 	char Pwm_1(char input)
 	{
-		// Pierre B.
+		// Arnaud + Julien + Emre + Charles
 		return ST_TXT_STORAGE;
 	}
 	
 	char Pwm_1_2(char input)
 	{
-		// Pierre B.
+		// Arnaud + Julien + Emre + Charles
 		return ST_TXT_STORAGE;
 	}
 	
 	char Pwm_1_2_3(char input)
 	{
-		// Pierre B.
+		// Arnaud + Julien + Emre + Charles
 		return ST_TXT_STORAGE;
 	}
 	
 	char Periode(char input)
 	{
-		// Pierre B.
+		// Arnaud + Julien + Emre + Charles
 		//return ST_FCT_PERIODE;
 		return ST_TXT_STORAGE;
 	}
 	
 	char Resolution(char input)
 	{
-		// Pierre B.
+		// Arnaud + Julien + Emre + Charles
 		//return ST_FCT_RESOLUTION;
 		return ST_TXT_PWM_SETUP;
 	}
 	
 	char Dent_Scie(char input)
 	{
-		// Pierre B.
+		// Arnaud + Julien + Emre + Charles
 		return ST_TXT_STORAGE;
 	}
 	
 	char Isocele(char input)
 	{
-		// Pierre B.
+		// Arnaud + Julien + Emre + Charles
 		return ST_TXT_STORAGE;
 	}
 	
 	char Eeprom(char input)
 	{
-		// Florimond H. & Smaïn J.
+		// Florian + Hughes
 		return ST_TXT_MONITORING;
 	}
 	
 	char Sram(char input)
 	{
-		// Thibault T. & Maxime M.
+		// Emre + Charles
 		return ST_TXT_MONITORING;
 	}
 	
 	char Monitoring(char input)
 	{
-		// Someone
+		// Antoine + Mathéo
 		return ST_TXT_CONTRAST;
 	}
 	
 	char Contrast(char input)
 	{
-		// Pierre C. & Arnaud D.
+		// Nobody
 		return ST_TXT_DEBUG;
 	}
 	
 	char Debug(char input)
 	{
-		// Someone
+		// Antoine + Mathéo
 		return ST_TXT_SETUP;
 	}
 	
 	char Sampling_Time(char input)
 	{
-		// Florimond H. & Smaïn J.
+		// Antoine + Mathéo + Florian + Hughes
 		//return ST_FCT_SAMPLING_TIME;
 		return ST_TXT_ON_OFF;
 	}
 	
 	char Duration(char input)
 	{
-		// Florimond H. & Smaïn J.
+		// Antoine + Mathéo + Florian + Hughes
 		//return ST_FCT_DURATION;
 		return ST_TXT_ON_OFF;
 	}
 	
 	char Datalogger_On_Off(char input)
 	{
-		// Florimond H. & Smaïn J.
+		// Antoine + Mathéo + Florian + Hughes
 		return ST_TXT_DATA_TRANSFER;
 	}
 	
 	char Transfer_Usart(char input)
 	{
-		// Florimond H. & Smaïn J.
+		// Antoine + Mathéo + Florian + Hughes
 		//return ST_FCT_DATA_TRANSFER;
 		return ST_TXT_DATALOGGER;
 	}
 	
 	char Sampling_CTRL(char input)
 	{
-		// Pierre C., Arnaud D., Thibault T.,  Maxime M., Maxime P., Florent M., Lukman N., Rémi G., Charles M., Denis B.
+		// Florimond + Daniel + Pierre + Rémi 
 		//return ST_FCT_SAMPLING_CTRL;
 		return ST_TXT_MANUAL_MODE;
 	}
 
 	char Manual_Mode(char input)
 	{
-		// Pierre C., Arnaud D., Thibault T.,  Maxime M., Maxime P., Florent M., Lukman N., Rémi G., Charles M., Denis B.
+		// Florimond + Daniel + Pierre + Rémi 
 		//return ST_FCT_MANUAL_MODE;
 		return ST_TXT_AUTO_MODE;
 	}
 	
 	char Auto_Mode(char input)
 	{
-		// Pierre C., Arnaud D., Thibault T.,  Maxime M., Maxime P., Florent M., Lukman N., Rémi G., Charles M., Denis B.
+		// Florimond + Daniel + Pierre + Rémi 
 		//return ST_FCT_AUTO_MODE;
 		return ST_TXT_MANUAL_MODE;
 	}
 	
 	char Pid_P(char input)
 	{
-		// Lukman N. & Rémi G.
+		// Nobody
 		//return ST_FCT_P;
 		return ST_TXT_I;
 	}
 	
 	char Pid_I(char input)
 	{
-		// Lukman N. & Rémi G
+		// Nobody
 		//return ST_FCT_I;
 		return ST_TXT_D;
 	}
@@ -253,7 +250,7 @@ void USART0_RX(volatile char *Trame_USART0)
 	
 	char Pid_D(char input)
 	{
-		// Lukman N. & Rémi G
+		// Nobody
 		//return ST_FCT_D;
 		return ST_TXT_WINDUP;
 	}
@@ -261,35 +258,35 @@ void USART0_RX(volatile char *Trame_USART0)
 	
 	char Pid_WindUp(char input)
 	{
-		// Lukman N. & Rémi G
+		// Nobody
 		//return ST_FCT_WINDUP;
 		return ST_TXT_SAMPLING_CTRL;
 	}
 	
 	char Recursion(char input)
 	{
-		// Pierre C., Arnaud D., Thibault T.,  Maxime M., Maxime P., Florent M., Charles M., Denis B.
+		// Florimond + Daniel + Pierre + Rémi
 		// Download fichier CSV commun !
 		return ST_TXT_SAMPLING_CTRL;
 	}
 	
 	char Smith(char input)
 	{
-		// Charles M. & Denis B.
+		// Nobody
 		// Download fichier CSV commun !
 		return ST_TXT_SAMPLING_CTRL;
 	}
 	
 	char Internal_Model(char input)
 	{
-		// Maxime P. & Florent M.
+		// Nobody
 		// Download fichier CSV commun !
 		return ST_TXT_MODEL_SETTING;
 	}
 	
 	char Internal_Model_Setting(char input)
 	{
-		// Maxime P. & Florent M.
+		// Nobody
 		// Download fichier CSV commun !
 		//return ST_FCT_MODEL_SETTING;
 		return ST_TXT_SAMPLING_CTRL;
@@ -297,14 +294,14 @@ void USART0_RX(volatile char *Trame_USART0)
 	
 	char Rst(char input)
 	{
-		// Thibault T. & Maxime M.
+		// Nobody
 		// Download fichier CSV commun !
 		return ST_TXT_SAMPLING_CTRL;
 	}
 	
 	char Pwm_Manual(char input)
 	{
-		// Pierre B.
+		// Arnaud + Julien + Emre + Charles
 		//return ST_FCT_MANUAL_MODE_PWM;
 		return ST_TXT_PWM;
 	}
@@ -312,27 +309,27 @@ void USART0_RX(volatile char *Trame_USART0)
 
 	char Pwm_Sinus(char input)
 	{
-		// Pierre B.
+		// Arnaud + Julien + Emre + Charles
 		//return ST_FCT_MODE_SINUS;
 		return ST_TXT_PWM;
 	}
 
 	char Sinus_Amplitude(char input)
 	{
-		// Pierre B.
+		// Arnaud + Julien + Emre + Charles
 		//return ST_FCT_SINUS_AMPLITUDE;
 		return ST_TXT_ON_OFF_SINUS;
 	}
 	char Sinus_Periode(char input)
 	{
-		// Pierre B.
+		// Arnaud + Julien + Emre + Charles
 		//return ST_FCT_SINUS_PERIODE;
 		return ST_TXT_ON_OFF_SINUS;
 	}
 	
 	char Sinus_On_Off(char input)
 	{
-		// Pierre B.
+		// Arnaud + Julien + Emre + Charles
 		//return ST_FCT_ON_OFF_SINUS;
 		return ST_TXT_SINUS;
 	}

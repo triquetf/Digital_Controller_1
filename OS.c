@@ -112,7 +112,10 @@ void OS_Start(void)
 	//Création, configuration et démarrage de Timer0pour générer une interruption toutes les mS
  	TIMER0_Init_1ms(); //A partir d'ici, interruption toutes les ms par Timer0
 	// Configuration USART0 pour 9600 baud avec interruption en réception
-	USART0_Init_9600_INT_ON_RX();
+	USART0_Init_115200_INT_ON_RX();
+	
+	// For debug
+	//Usart0_Tx_String("Usart0 OK");
 	
 	
 	// Initialisation des interruptions, on autorise toutes les interruptions
@@ -161,7 +164,7 @@ void OS_Start(void)
 		 if (statetext)
 		 {
 			 //Afficher_LCD(statetext);
-			 cli();lcd_clear();lcd_set_cursor(1,0);lcd_puts(strcpy_P(Message_LCD, statetext));sei();
+			 cli();lcd_clrscr();lcd_gotoxy(0,0);lcd_puts(strcpy_P(Message_LCD, statetext));sei();
 			 statetext = NULL; // Pour ne pas écrire le même texte sur l'afficheur (évite la scintillation de l'écran)
 		 }
 		 		 
