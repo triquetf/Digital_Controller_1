@@ -2,7 +2,7 @@
 #define _main_h_
 
 // INCLUDE (si applicable)
-
+// TEST GIT
 // DEFINE 
 
  #define F_CPU 8000000UL  // 8 MHz
@@ -24,7 +24,7 @@ enum {NONE,UP, DOWN, LEFT, RIGHT, ENTER};	// Used with the button variable
 #define F_CPU 1000000
 
 // STATE MACHINE
-// Niv Supérieur
+// Niv Supï¿½rieur
 #define ST_TXT_WELCOME		1
 
 // FOCTIONNALITES , HORIZONTAL
@@ -168,7 +168,7 @@ enum {NONE,UP, DOWN, LEFT, RIGHT, ENTER};	// Used with the button variable
 
 //CALLBACK
 void Switch_LED(void);	// callback timer --> cligotement de la LED
-void USART0_RX(volatile char *Trame_USART0);	// callback USART0 --> gestion de la commande reçue via le port série.
+void USART0_RX(volatile char *Trame_USART0);	// callback USART0 --> gestion de la commande reï¿½ue via le port sï¿½rie.
 
 //STATE MACHINE
 char Set_Pwm_Red(char input);
