@@ -4,6 +4,7 @@
 #include "TIMERS.h"
 #include "USART.h"
 #include "lcd.h"
+#include "DS3232.h"
 #include <avr/interrupt.h>
 #include <avr/io.h>
 
@@ -241,7 +242,7 @@ ISR(TIMER0_OVF_vect)
 // ******************
 ISR(INT0_vect)
 {	
-	
+	Usart0_Tx_String("Alarme sonne");Usart0_Tx(0X0D);
 }
 
 // ***************************************
