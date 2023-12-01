@@ -89,7 +89,7 @@ void USART0_RX(volatile char *Trame_USART0)
 	char Current(char input)
 	{
 		
-		// Antoine + Mathéo
+		// Antoine + Mathéo - Travail ADC
 		return ST_TXT_ACTUATOR;
 	}
 	
