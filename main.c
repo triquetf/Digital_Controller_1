@@ -13,6 +13,8 @@
 #include "ADC.h"
 #include "ftoa.h"
 #include "PWM.h"
+#include "I2C_Master.h"
+#include "DS3232.h"
 
 // Mes variables globales
 unsigned char IDCB_Led = 0;			// Identificateur callback timer pour le clignotement de la LED
@@ -68,16 +70,154 @@ void USART0_RX(volatile char *Trame_USART0)
 	
 	char Date(char input)
 	{
-		// Arnaud + Julien
-		//return ST_FCT_DATE;
-		return ST_TXT_TIME;
+		// Arnaud et Julien
+		static unsigned char First_in_Function = TRUE;
+		static int Date_Jour;
+		static int Date_Moi;
+		static int Date_Annee;
+		static char temp;
+		int IndJ;  int IndMoi; int IndAn;
+		char String_Jour[4];
+		char String_Moi[4];
+		char String_Annee[4];
+		if (First_in_Function){
+			Date_Jour = 15;
+			if (Date_Jour<10){IndJ = 1;}else{IndJ = 0;}
+			Date_Moi = 6;
+			if (Date_Moi<10){IndMoi = 4;}else{IndMoi = 3;}
+			Date_Annee = 23;
+			if (Date_Annee<10){IndAn = 7;}else{IndAn = 6;}
+			temp = 0;
+			itoa(Date_Jour, String_Jour, 10);
+			itoa(Date_Moi, String_Moi, 10);
+			itoa(Date_Annee, String_Annee, 10);
+			cli();lcd_gotoxy(0,1);lcd_puts("  -  -          ");sei();
+			cli();lcd_gotoxy(IndJ,1);lcd_puts(String_Jour);sei();
+			cli();lcd_gotoxy(IndMoi,1);lcd_puts(String_Moi);sei();
+			cli();lcd_gotoxy(IndAn,1);lcd_puts(String_Annee);sei();
+			//cli();lcd_gotoxy(1,1);lcd_command(LCD_ON_CURSOR);lcd_command(LCD_ON_BLINK);sei();
+			First_in_Function = FALSE;
+		}
+		else
+		{
+			if (input != ENTER)
+			{
+				switch(input){
+					case LEFT :
+					temp--;
+					if (temp<0){temp=0;}
+					break;
+					case RIGHT:
+					temp++;
+					if (temp>2){temp=2;}
+					break;
+					
+				}
+				switch(temp){
+					case 0 :
+					Date_Jour = EDIT_VALUE(Date_Jour, input,1,31);
+					if (Date_Jour<10){IndJ = 1;cli();lcd_gotoxy(0,1);lcd_puts(0);sei();}else{IndJ = 0;}
+					itoa(Date_Jour, String_Jour, 10);
+					cli();lcd_gotoxy(IndJ,1);lcd_puts(String_Jour);sei();
+					break;
+					case 1 :
+					Date_Moi = EDIT_VALUE(Date_Moi, input,1,12);
+					if (Date_Moi<10){IndMoi = 4;cli();lcd_gotoxy(3,1);lcd_puts(0);sei();}else{IndMoi = 3;}
+					itoa(Date_Moi, String_Moi, 10);
+					cli();lcd_gotoxy(IndMoi,1);lcd_puts(String_Moi);sei();
+					break;
+					case 2 :
+					Date_Annee = EDIT_VALUE(Date_Annee, input,0,99);
+					if (Date_Annee<10){IndAn = 7;cli();lcd_gotoxy(6,1);lcd_puts(0);sei();}else{IndAn = 6;}
+					itoa(Date_Annee, String_Annee, 10);
+					cli();lcd_gotoxy(IndAn,1);lcd_puts(String_Annee);sei();
+					break;
+				}
+				
+			}
+			else
+			{
+				RTC_Clock_Set_Date(Date_Jour,Date_Moi,Date_Annee);
+				First_in_Function = TRUE;
+				return ST_TXT_TIME;
+			}
+		}
+		return ST_FCT_DATE;
 	}
 	
 	char Time(char input)
 	{
-		// Arnaud + Julien
-		//return ST_TXT_SENSOR;
-		return ST_TXT_CLOCK;
+		static unsigned char First_in_Function = TRUE;
+		static int Sec;
+		static int Min;
+		static int Heure;
+		static char temp;
+		int Inds;  int Indmin; int Indh;
+		char String_s[4];
+		char String_min[4];
+		char String_Heure[4];
+		if (First_in_Function){
+			Sec = 30;
+			if (Sec<10){Inds = 1;}else{Inds = 0;}
+			Min = 30;
+			if (Min<10){Indmin = 4;}else{Indmin = 3;}
+			Heure = 12;
+			if (Heure<10){Indh = 7;}else{Indh = 6;}
+			temp = 0;
+			itoa(Sec, String_s, 10);
+			itoa(Min, String_min, 10);
+			itoa(Heure, String_Heure, 10);
+			cli();lcd_gotoxy(0,1);lcd_puts("  h  m  s        ");sei();
+			cli();lcd_gotoxy(Inds,1);lcd_puts(String_Heure);sei();
+			cli();lcd_gotoxy(Indmin,1);lcd_puts(String_min);sei();
+			cli();lcd_gotoxy(Indh,1);lcd_puts(String_s);sei();
+			First_in_Function = FALSE;
+		}
+		else
+		{
+			if (input != ENTER)
+			{
+				switch(input){
+					case LEFT :
+					temp--;
+					if (temp<0){temp=0;}
+					break;
+					case RIGHT:
+					temp++;
+					if (temp>2){temp=2;}
+					break;
+					
+				}
+				switch(temp){
+					case 2 :
+					Sec= EDIT_VALUE(Sec, input,0,59);
+					if (Sec<10){Inds = 7;cli();lcd_gotoxy(6,1);lcd_puts(0);sei();}else{Inds = 6;}
+					itoa(Sec, String_s, 10);
+					cli();lcd_gotoxy(Inds,1);lcd_puts(String_s);sei();
+					break;
+					case 1 :
+					Min = EDIT_VALUE(Min, input,0,59);
+					if (Min<10){Indmin = 4;cli();lcd_gotoxy(3,1);lcd_puts(0);sei();}else{Indmin = 3;}
+					itoa(Min, String_min, 10);
+					cli();lcd_gotoxy(Indmin,1);lcd_puts(String_min);sei();
+					break;
+					case 0 :
+					Heure = EDIT_VALUE(Heure, input,0,99);
+					if (Heure<10){Indh = 1;cli();lcd_gotoxy(0,1);lcd_puts(0);sei();}else{Indh = 0;}
+					itoa(Heure, String_Heure, 10);
+					cli();lcd_gotoxy(Indh,1);lcd_puts(String_Heure);sei();
+					break;
+				}
+				
+			}
+			else
+			{
+				RTC_Clock_Set_Heure(Sec,Min,Heure);
+				First_in_Function = TRUE;
+				return ST_TXT_SENSOR;
+			}
+		}
+		return ST_FCT_TIME;
 	}
 	
 	char Adc(char input)
@@ -371,6 +511,31 @@ void USART0_RX(volatile char *Trame_USART0)
 				Initial_Value = Initial_Value + 10;
 				if (Initial_Value > 99) Initial_Value = 99;
 				itoa(Initial_Value, String, 10);
+				//cli();lcd_gotoxy(0,1);lcd_puts("                ");lcd_gotoxy(0,1);lcd_puts(String);sei();
+				break;
+			}
+		}
+		return Initial_Value;
+	}
+	
+	int EDIT_VALUE(int Initial_Value, char input, int Value_Min, int Value_Max)
+	{
+		//char String[4];
+		switch (input)
+		{
+			case DOWN :
+			{
+				Initial_Value--;
+				if (Initial_Value == Value_Min-1) Initial_Value = Value_Max;
+				//itoa(Initial_Value, String, 10);
+				//cli();lcd_gotoxy(0,1);lcd_puts("                ");lcd_gotoxy(0,1);lcd_puts(String);sei();
+				break;
+			}
+			case UP :
+			{
+				Initial_Value++;
+				if (Initial_Value == Value_Max+1) Initial_Value = Value_Min;
+				//itoa(Initial_Value, String, 10);
 				//cli();lcd_gotoxy(0,1);lcd_puts("                ");lcd_gotoxy(0,1);lcd_puts(String);sei();
 				break;
 			}

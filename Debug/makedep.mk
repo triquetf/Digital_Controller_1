@@ -4,9 +4,13 @@
 
 ADC.c
 
+DS3232.c
+
 ftoa.c
 
 Hardware.c
+
+I2C_Master.c
 
 lcd.c
 

@@ -221,6 +221,6 @@ char Sinus_On_Off(char input);
 
 //AUTRES
 int EDIT_VALUE_0_99(int Initial_Value, char input);
-
+int EDIT_VALUE(int Initial_Value, char input, int Value_Min, int Value_Max);
 
 #endif
