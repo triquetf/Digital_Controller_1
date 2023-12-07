@@ -16,7 +16,7 @@ main.d main.o: .././main.c \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h \
  .././Main.h .././OS.h .././Hardware.h .././USART.h .././lcd.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\pgmspace.h \
- .././ADC.h .././ftoa.h .././PWM.h
+ .././ADC.h .././ftoa.h .././PWM.h .././I2C_Master.h .././DS3232.h
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
 
@@ -65,3 +65,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 .././ftoa.h:
 
 .././PWM.h:
+
+.././I2C_Master.h:
+
+.././DS3232.h:

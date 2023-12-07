@@ -38,8 +38,10 @@ SUBDIRS :=
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
 ../ADC.c \
+../DS3232.c \
 ../ftoa.c \
 ../Hardware.c \
+../I2C_Master.c \
 ../lcd.c \
 ../main.c \
 ../OS.c \
@@ -56,8 +58,10 @@ ASM_SRCS +=
 
 OBJS +=  \
 ADC.o \
+DS3232.o \
 ftoa.o \
 Hardware.o \
+I2C_Master.o \
 lcd.o \
 main.o \
 OS.o \
@@ -67,8 +71,10 @@ USART.o
 
 OBJS_AS_ARGS +=  \
 ADC.o \
+DS3232.o \
 ftoa.o \
 Hardware.o \
+I2C_Master.o \
 lcd.o \
 main.o \
 OS.o \
@@ -78,8 +84,10 @@ USART.o
 
 C_DEPS +=  \
 ADC.d \
+DS3232.d \
 ftoa.d \
 Hardware.d \
+I2C_Master.d \
 lcd.d \
 main.d \
 OS.d \
@@ -89,8 +97,10 @@ USART.d
 
 C_DEPS_AS_ARGS +=  \
 ADC.d \
+DS3232.d \
 ftoa.d \
 Hardware.d \
+I2C_Master.d \
 lcd.d \
 main.d \
 OS.d \
@@ -119,6 +129,13 @@ LINKER_SCRIPT_DEP+=
 	@echo Finished building: $<
 	
 
+./DS3232.o: .././DS3232.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\Atmel\ATmega_DFP\2.0.401\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega1284p -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\Atmel\ATmega_DFP\2.0.401\gcc\dev\atmega1284p" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
 ./ftoa.o: .././ftoa.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
@@ -127,6 +144,13 @@ LINKER_SCRIPT_DEP+=
 	
 
 ./Hardware.o: .././Hardware.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\Atmel\ATmega_DFP\2.0.401\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega1284p -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\Atmel\ATmega_DFP\2.0.401\gcc\dev\atmega1284p" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+./I2C_Master.o: .././I2C_Master.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\Atmel\ATmega_DFP\2.0.401\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega1284p -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\Atmel\ATmega_DFP\2.0.401\gcc\dev\atmega1284p" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
